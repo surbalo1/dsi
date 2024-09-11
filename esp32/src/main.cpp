@@ -43,10 +43,10 @@ void tareaLeerADC(void *parameter) {
             voltaje = (voltaje / VREF) * MAX_VOLTAGE;
 
             sprintf(cadena, "Valor ADC en 0-5V: %.2f", voltaje);  // Formato flotante con 2 decimales
-            imprimir(cadena);  // Reemplazo de Serial.println
+            imprimir(cadena);  
         } else {
             sprintf(cadena, "No_Disponible");
-            imprimir(cadena);  // Reemplazo de Serial.println
+            imprimir(cadena);  
         }
         delaybsp(pdMS_TO_TICKS(1000));
     }
@@ -64,13 +64,13 @@ void tareaControlSistema(void *parameter) {
             if (contadorPresiones % 2 != 0) {
                 sistemaActivo = true;
                 sprintf(cadena, "Sistema prendido");
-                imprimir(cadena);  // Reemplazo de Serial.println
+                imprimir(cadena);  
                 writepin(ledPrendidoPin, HIGH);
                 writepin(ledApagadoPin, LOW);
             } else {
                 sistemaActivo = false;
                 sprintf(cadena, "Sistema apagado");
-                imprimir(cadena);  // Reemplazo de Serial.println
+                imprimir(cadena); 
                 writepin(ledPrendidoPin, LOW);
                 writepin(ledApagadoPin, HIGH);
             }
@@ -81,7 +81,7 @@ void tareaControlSistema(void *parameter) {
 
 void setup() {
     inicializarHardware();
-    initcom(9600);  // Inicializa la comunicación serial (modificada)
+    initcom(9600); 
 
     
     #ifdef ESP_32
@@ -93,5 +93,5 @@ void setup() {
 }
 
 void loop() {
-    // El loop está vacío ya que FreeRTOS maneja las tareas en ESP32
+   
 }
