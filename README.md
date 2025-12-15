@@ -1,93 +1,104 @@
-# Multi-Platform Board Support Package (BSP)
+<div align="center">
 
-Hardware abstraction layer (HAL) providing unified API for ESP32 and PIC18F4550 microcontrollers. Enables portable embedded firmware development across different hardware platforms.
+# 🔧 Multi-Platform BSP (ESP32 & PIC18F)
 
-## Description
+[![C](https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![ESP32](https://img.shields.io/badge/ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white)](https://espressif.com)
+[![Microchip](https://img.shields.io/badge/PIC18F-EE3233?style=for-the-badge&logo=microchip&logoColor=white)](https://microchip.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-This BSP (Board Support Package) project provides a unified interface for developing embedded applications that can run on multiple microcontroller platforms without code changes. Currently supports ESP32 and PIC18F4550, with easy extensibility for additional platforms.
+**Hardware Abstraction Layer (HAL) for portable embedded development across ESP32 and PIC18F platforms.**
 
-**Key Benefits:**
-- Write once, deploy on multiple platforms
-- Hardware abstraction for GPIO, timers, UART, etc.
-- Consistent API across different MCUs
-- Simplified peripheral management
-- Reduced development time for multi-platform projects
+*Write once, deploy anywhere • Unified API • Cross-platform firmware*
 
-## Supported Platforms
+</div>
 
-| Platform | Architecture | Main Features |
-|----------|--------------|---------------|
+---
+
+## 📋 Overview
+
+A Board Support Package (BSP) providing a unified interface for developing embedded applications that run on multiple microcontroller platforms without code changes. Currently supports ESP32 and PIC18F4550.
+
+---
+
+## ✨ Key Benefits
+
+| Benefit | Description |
+|---------|-------------|
+| **📝 Write Once** | Same code runs on both platforms |
+| **🔌 Unified API** | Consistent peripheral interface |
+| **⚡ Easy Extension** | Add new MCUs with minimal effort |
+| **⏱️ Faster Development** | Reduced multi-platform effort |
+
+---
+
+## 🎯 Supported Platforms
+
+| Platform | Architecture | Features |
+|----------|--------------|----------|
 | **ESP32** | Xtensa LX6 | WiFi, Bluetooth, dual-core |
-| **PIC18F4550** | 8-bit RISC | USB, low power, legacy support |
+| **PIC18F4550** | 8-bit RISC | USB, low power, legacy |
 
-## Project Structure
+---
+
+## 🔌 Abstracted Peripherals
+
+| Peripheral | Status |
+|:----------:|:------:|
+| **GPIO** | ✅ |
+| **UART** | ✅ |
+| **Timers** | ✅ |
+| **ADC** | ✅ |
+| **PWM** | ✅ |
+
+---
+
+## 📁 Project Structure
 
 ```
 dsi/
-├── bsp/                  # Common BSP interface
-│   ├── bsp.h            # Main BSP header
-│   ├── config.h         # Configuration options
-│   └── types.h          # Common type definitions
-├── esp32/               # ESP32-specific implementation
-│   ├── main.cpp         # ESP32 main application
-│   ├── gpio_hal.c       # GPIO hardware abstraction
-│   └── uart_hal.c       # UART hardware abstraction
-├── pic18f4550/          # PIC18F4550-specific implementation
-│   ├── main.c           # PIC18F main application
-│   ├── gpio_hal.c       # GPIO hardware abstraction
-│   └── uart_hal.c       # UART hardware abstraction
-└── README.md
+├── 📁 bsp/              # Common BSP interface
+│   ├── bsp.h            # Main header
+│   ├── config.h         # Platform config
+│   └── types.h          # Common types
+│
+├── 📁 esp32/            # ESP32 implementation
+│   ├── main.cpp
+│   ├── gpio_hal.c
+│   └── uart_hal.c
+│
+└── 📁 pic18f4550/       # PIC18F implementation
+    ├── main.c
+    ├── gpio_hal.c
+    └── uart_hal.c
 ```
 
-## Features
+---
 
-### Abstracted Peripherals
+## 🚀 Quick Start
 
-- **GPIO** - Digital I/O control
-- **UART** - Serial communication
-- **Timers** - Time-based operations
-- **ADC** - Analog-to-digital conversion
-- **PWM** - Pulse-width modulation
+### ESP32
 
-
-## Getting Started
-
-### Prerequisites
-
-**For ESP32:**
-- ESP-IDF or Arduino IDE
-- ESP32 development board
-
-**For PIC18F4550:**
-- MPLAB X IDE
-- XC8 Compiler
-- PIC18F4550 board or dev kit
-
-### Building for ESP32
-
-```
+```bash
 cd esp32
-# Using ESP-IDF
-idf.py build
-idf.py flash
-
-# Or using PlatformIO
-pio run --target upload
+idf.py build && idf.py flash
+# Or: pio run --target upload
 ```
 
-### Building for PIC18F4550
+### PIC18F4550
 
-```
+```bash
 cd pic18f4550
-# Open project in MPLAB X
-# Build and program using MPLABx IPE
+# Open in MPLAB X → Build → Flash
 ```
 
-## Configuration
+---
 
-Edit `bsp/config.h` to customize:
+## ⚙️ Configuration
 
-```
+Edit `bsp/config.h`:
+
+```c
 // Select target platform
 #define BSP_PLATFORM_ESP32     1
 #define BSP_PLATFORM_PIC18F    0
@@ -98,24 +109,25 @@ Edit `bsp/config.h` to customize:
 #define BSP_USE_ADC           1
 ```
 
-## Adding New Platforms
+---
 
-To add support for a new microcontroller:
+## 🏭 Use Cases
 
-1. Create new folder: `platformname/`
-2. Implement HAL functions in `platformname/xxx_hal.c`
-3. Add platform-specific main file
-4. Update `bsp/config.h` with new platform define
+- **IoT Prototyping** - Test on ESP32, deploy on PIC
+- **Education** - Learn embedded with platform flexibility
+- **Legacy Upgrades** - Migrate PIC systems to ESP32
+- **Cross-Platform Validation** - Verify firmware across architectures
 
-## Use Cases
+---
 
-- **IoT Prototyping**: Test on ESP32, deploy on PIC for production
-- **Educational Projects**: Learn embedded development with platform flexibility
-- **Legacy System Upgrades**: Migrate PIC-based systems to ESP32
-- **Cross-Platform Validation**: Verify firmware logic across architectures
+## 📄 License
 
-## Authors
+MIT License
 
-**Rafael Gonzalez**
-- GitHub: [@surbalo1](https://github.com/surbalo1)
-- LinkedIn: [Rafael Gonzalez](https://www.linkedin.com/in/rafael-glez-chong/)
+---
+
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/Star_on_GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/surbalo1/embedded-bsp-esp32-pic18f)
+
+</div>
